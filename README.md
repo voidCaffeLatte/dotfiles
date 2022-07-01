@@ -1,5 +1,11 @@
 # dotfiles
 
+## Settings
+
+### Git
+- `git config core.fsmonitor true`
+- `git config core.untrackedCache true`
+
 ## Links
 
 ### Fish - Shell
