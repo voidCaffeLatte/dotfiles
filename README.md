@@ -8,14 +8,15 @@
 
 ## Links
 
+### iTerms2 - Terminal App
+- https://iterm2.com/
+
 ### Fish - Shell
 - https://fishshell.com/
 
 ### Fisher - Plugin Manager for Fish
 - https://github.com/jorgebucaran/fisher
 
-### bobthefish - Fish Theme
-- https://github.com/oh-my-fish/theme-bobthefish
+### Starship - Cross-Shell Prompt
+- https://starship.rs/
 
-### iTerms2 - Terminal App
-- https://iterm2.com/
