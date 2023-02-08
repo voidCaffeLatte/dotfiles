@@ -1,3 +1,5 @@
+command_timeout = 10000
+
 [battery]
 full_symbol = "• "
 charging_symbol = "⇡ "
@@ -18,3 +20,8 @@ symbol = "🧊 "
 truncation_length = 0
 truncation_symbol = ".../"
 truncate_to_repo = false
+
+[cmd_duration]
+min_time = 0 
+show_milliseconds = true
+
