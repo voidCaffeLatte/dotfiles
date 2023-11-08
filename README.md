@@ -8,14 +8,11 @@
 
 ## Links
 
-### iTerms2 - Terminal App
-- https://iterm2.com/
+### Warp - Terminal App
+- https://www.warp.dev/
 
 ### Fish - Shell
 - https://fishshell.com/
-
-### Fisher - Plugin Manager for Fish
-- https://github.com/jorgebucaran/fisher
 
 ### Starship - Cross-Shell Prompt
 - https://starship.rs/
