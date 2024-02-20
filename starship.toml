@@ -25,3 +25,7 @@ truncate_to_repo = false
 min_time = 0 
 show_milliseconds = true
 
+[time]
+disabled = false
+time_format = "%m-%d-%y %r"
+
