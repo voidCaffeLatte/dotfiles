@@ -7,15 +7,6 @@ discharging_symbol = "⇣ "
 unknown_symbol = "❓ "
 empty_symbol = "❗ "
 
-[erlang]
-symbol = "ⓔ "
-
-[nodejs]
-symbol = "[⬢](bold green) "
-
-[pulumi]
-symbol = "🧊 "
-
 [directory]
 truncation_length = 0
 truncation_symbol = ".../"
@@ -27,5 +18,13 @@ show_milliseconds = true
 
 [time]
 disabled = false
-time_format = "%m-%d-%y %r"
+time_format = "%m-%d-%y %T"
+
+[hostname]
+disabled = false
+ssh_only = false
+
+[username]
+disabled = false
+show_always = true
 
