@@ -3,3 +3,6 @@ if test -x /opt/homebrew/bin/brew
 end
 
 starship init fish | source
+
+abbr --add -- g git
+

@@ -2,9 +2,17 @@
 
 ## Settings
 
-### Git
-- `git config core.fsmonitor true`
-- `git config core.untrackedCache true`
+### Git Config
+```gitconfig
+[core]
+    autocrlf = input
+    editor = vim
+    fsmonitor = true
+    untrackedcache = true
+[alias]
+    st = status
+    sw = switch
+```
 
 ## Links
 
