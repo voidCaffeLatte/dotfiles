@@ -18,7 +18,7 @@ show_milliseconds = true
 
 [time]
 disabled = false
-time_format = "%m-%d-%y %T"
+time_format = "%Y-%m-%d %a %T"
 
 [hostname]
 disabled = false
