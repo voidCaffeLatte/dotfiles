@@ -1,2 +1,4 @@
 [tools]
+fd = "latest"
 neovim = "latest"
+ripgrep = "latest"
