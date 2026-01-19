@@ -25,3 +25,5 @@
 ### Starship - Cross-Shell Prompt
 - https://starship.rs/
 
+### mise - Dev Env Manager
+- https://github.com/jdx/mise
