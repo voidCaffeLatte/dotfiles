@@ -1,19 +1,5 @@
 # dotfiles
 
-## Settings
-
-### Git Config
-```gitconfig
-[core]
-    autocrlf = input
-    editor = vim
-    fsmonitor = true
-    untrackedcache = true
-[alias]
-    st = status
-    sw = switch
-```
-
 ## Links
 
 ### Warp - Terminal App
