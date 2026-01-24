@@ -1,0 +1,20 @@
+[user]
+  name = voidCaffeLatte
+  email = void.caffelatte@gmail.com
+[core]
+  autocrlf = input
+  editor = nvim
+  fsmonitor = true
+  untrackedcache = true
+  pager = delta
+[alias]
+  st = status
+  sw = switch
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  side-by-side = true
+  line-numbers = true
+[merge]
+  conflictStyle = zdiff3
