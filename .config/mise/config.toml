@@ -1,4 +1,5 @@
 [tools]
+delta = "latest"
 fd = "latest"
 fzf = "latest"
 neovim = "latest"
