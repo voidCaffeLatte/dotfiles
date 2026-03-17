@@ -2,5 +2,6 @@
 delta = "latest"
 fd = "latest"
 fzf = "latest"
+jq = "latest"
 neovim = "latest"
 ripgrep = "latest"
