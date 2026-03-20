@@ -25,6 +25,7 @@ readonly ICON_BRANCH='󰘬'   # nf-md-source_branch
 readonly ICON_FOLDER='󰝰'   # nf-md-folder_open
 readonly ICON_CLOCK='󰥔'    # nf-md-clock_outline
 readonly ICON_CONTEXT='󰡫'  # nf-md-chart_box
+readonly ICON_RATE='󰖡'     # nf-md-speedometer
 
 readonly SEPARATOR="${GRAY}│${RESET}"
 
@@ -41,47 +42,47 @@ color_for_percentage() {
 }
 
 # Block-shade progress bar using Unicode Block Elements
-# Each cell = 10%. Filled cells use █, unfilled use ░ (gray).
-# Partial cell shade by remainder (percent % 10): 0-2=none, 3-4=░, 5-6=▒, 7-8=▓, 9=█
+# Characters: ' ▏▎▍▌▋▊▉█' (9 levels per cell, 8 sub-steps)
+# bar_width=10 cells → 80 discrete steps. No unfilled background.
 progress_bar() {
   local -i percentage=${1:-0}
   local fill_color=${2:-$GREEN}
   local -i bar_width=10
-  local -i filled_count=$(( percentage / 10 ))
-  (( filled_count > bar_width )) && filled_count=$bar_width
-  local -i remainder=$(( percentage % 10 ))
-
-  # Determine partial block character
-  local partial_block=""
-  if (( filled_count < bar_width )); then
-    if   (( remainder >= 9 )); then partial_block="█"
-    elif (( remainder >= 7 )); then partial_block="▓"
-    elif (( remainder >= 5 )); then partial_block="▒"
-    elif (( remainder >= 3 )); then partial_block="░"
-    fi
-  fi
+  local blocks=(' ' '▏' '▎' '▍' '▌' '▋' '▊' '▉' '█')
+  local -i total_units=$(( percentage * bar_width * 8 / 100 ))
+  (( total_units > bar_width * 8 )) && total_units=$(( bar_width * 8 ))
+  local -i filled_count=$(( total_units / 8 ))
+  local -i partial_index=$(( total_units % 8 ))
 
   # Build filled portion
   local filled_string
   printf -v filled_string '%*s' "$filled_count" ''
   filled_string=${filled_string// /█}
-  [[ -n $partial_block ]] && filled_string+=$partial_block && (( filled_count++ ))
 
-  # Build unfilled portion
-  local -i unfilled_count=$(( bar_width - filled_count ))
-  local unfilled_string
-  printf -v unfilled_string '%*s' "$unfilled_count" ''
-  unfilled_string=${unfilled_string// /░}
+  # Append partial block if needed
+  if (( filled_count < bar_width && partial_index > 0 )); then
+    filled_string+=${blocks[$partial_index]}
+  fi
 
-  printf '%s%s%s%s' "$fill_color" "$filled_string" "$GRAY" "$unfilled_string"
+  # Pad with spaces to fill bar_width
+  local -i used_cells=$(( filled_count + (partial_index > 0 ? 1 : 0) ))
+  local -i pad_count=$(( bar_width - used_cells ))
+  local pad_string
+  printf -v pad_string '%*s' "$pad_count" ''
+
+  printf '%s%s%s' "$fill_color" "$filled_string" "$pad_string"
 }
 
 # ─── Parse JSON (single jq call) ───
-IFS=$'\t' read -r model working_directory used_percentage_raw < <(
+IFS=$'\t' read -r model working_directory used_percentage_raw five_hour_pct five_hour_resets seven_day_pct seven_day_resets < <(
   jq -r '[
     (.model.display_name // "Unknown"),
     (.cwd // "."),
-    (.context_window.used_percentage // 0 | tostring)
+    (.context_window.used_percentage // 0 | tostring),
+    (.rate_limits.five_hour.used_percentage // "" | tostring),
+    (.rate_limits.five_hour.resets_at // "" | tostring),
+    (.rate_limits.seven_day.used_percentage // "" | tostring),
+    (.rate_limits.seven_day.resets_at // "" | tostring)
   ] | join("\t")' <<< "$input"
 )
 
@@ -123,3 +124,38 @@ printf '%s%s context%s   [%s%s] %s%3d%%%s\n' \
   "$FOREGROUND" "$ICON_CONTEXT" "$RESET" \
   "$context_bar" "$RESET" \
   "$context_color" "$used_percentage" "$RESET"
+
+# ─── LINE 4: Rate limits (5h / 7d) ───
+format_resets_at() {
+  local epoch=${1:-}
+  [[ -z $epoch || $epoch == "null" ]] && return
+  TZ="Asia/Tokyo" date -d "@${epoch}" "+%y-%m-%d %H:%M" 2>/dev/null || true
+}
+
+if [[ -n $five_hour_pct && $five_hour_pct != "null" ]]; then
+  five_hour_int=$(printf '%.0f' "$five_hour_pct" 2>/dev/null || echo 0)
+  five_color=$(color_for_percentage "$five_hour_int")
+  five_bar=$(progress_bar "$five_hour_int" "$five_color")
+  five_reset_str=$(format_resets_at "$five_hour_resets")
+  five_reset_label=""
+  [[ -n $five_reset_str ]] && five_reset_label=" ${GRAY}reset ${five_reset_str}${RESET}"
+  printf '%s%s 5h quota%s  [%s%s] %s%3d%%%s%s\n' \
+    "$FOREGROUND" "$ICON_RATE" "$RESET" \
+    "$five_bar" "$RESET" \
+    "$five_color" "$five_hour_int" "$RESET" \
+    "$five_reset_label"
+fi
+
+if [[ -n $seven_day_pct && $seven_day_pct != "null" ]]; then
+  seven_day_int=$(printf '%.0f' "$seven_day_pct" 2>/dev/null || echo 0)
+  seven_color=$(color_for_percentage "$seven_day_int")
+  seven_bar=$(progress_bar "$seven_day_int" "$seven_color")
+  seven_reset_str=$(format_resets_at "$seven_day_resets")
+  seven_reset_label=""
+  [[ -n $seven_reset_str ]] && seven_reset_label=" ${GRAY}reset ${seven_reset_str}${RESET}"
+  printf '%s%s 7d quota%s  [%s%s] %s%3d%%%s%s\n' \
+    "$FOREGROUND" "$ICON_RATE" "$RESET" \
+    "$seven_bar" "$RESET" \
+    "$seven_color" "$seven_day_int" "$RESET" \
+    "$seven_reset_label"
+fi
