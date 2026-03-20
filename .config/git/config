@@ -10,6 +10,17 @@
 [alias]
   st = status
   sw = switch
+  pl = pull
+  ps = push
+  fe = fetch
+  rs = restore
+  re = reset
+  rb = rebase
+  cm = commit
+  df = diff
+  ds = diff --staged
+  lg = log --oneline --graph
+  ss = stash
 [interactive]
   diffFilter = delta --color-only
 [delta]
