@@ -66,15 +66,15 @@ progress_bar() {
 
   # Pad with spaces to fill bar_width
   local -i used_cells=$(( filled_count + (partial_index > 0 ? 1 : 0) ))
-  local -i pad_count=$(( bar_width - used_cells ))
-  local pad_string
-  printf -v pad_string '%*s' "$pad_count" ''
+  local -i padding_count=$(( bar_width - used_cells ))
+  local padding_string
+  printf -v padding_string '%*s' "$padding_count" ''
 
-  printf '%s%s%s' "$fill_color" "$filled_string" "$pad_string"
+  printf '%s%s%s' "$fill_color" "$filled_string" "$padding_string"
 }
 
 # ─── Parse JSON (single jq call) ───
-IFS=$'\t' read -r model working_directory used_percentage_raw five_hour_pct five_hour_resets seven_day_pct seven_day_resets < <(
+IFS=$'\t' read -r model working_directory used_percentage_raw five_hour_percentage five_hour_resets_at seven_day_percentage seven_day_resets_at < <(
   jq -r '[
     (.model.display_name // "Unknown"),
     (.cwd // "."),
@@ -132,30 +132,30 @@ format_resets_at() {
   TZ="Asia/Tokyo" date -d "@${epoch}" "+%y-%m-%d %H:%M" 2>/dev/null || true
 }
 
-if [[ -n $five_hour_pct && $five_hour_pct != "null" ]]; then
-  five_hour_int=$(printf '%.0f' "$five_hour_pct" 2>/dev/null || echo 0)
-  five_color=$(color_for_percentage "$five_hour_int")
-  five_bar=$(progress_bar "$five_hour_int" "$five_color")
-  five_reset_str=$(format_resets_at "$five_hour_resets")
-  five_reset_label=""
-  [[ -n $five_reset_str ]] && five_reset_label=" ${GRAY}reset ${five_reset_str}${RESET}"
+if [[ -n $five_hour_percentage && $five_hour_percentage != "null" ]]; then
+  five_hour_integer=$(printf '%.0f' "$five_hour_percentage" 2>/dev/null || echo 0)
+  five_hour_color=$(color_for_percentage "$five_hour_integer")
+  five_hour_bar=$(progress_bar "$five_hour_integer" "$five_hour_color")
+  five_hour_reset_string=$(format_resets_at "$five_hour_resets_at")
+  five_hour_reset_label=""
+  [[ -n $five_hour_reset_string ]] && five_hour_reset_label=" ${GRAY}reset ${five_hour_reset_string}${RESET}"
   printf '%s%s 5h quota%s  [%s%s] %s%3d%%%s%s\n' \
     "$FOREGROUND" "$ICON_RATE" "$RESET" \
-    "$five_bar" "$RESET" \
-    "$five_color" "$five_hour_int" "$RESET" \
-    "$five_reset_label"
+    "$five_hour_bar" "$RESET" \
+    "$five_hour_color" "$five_hour_integer" "$RESET" \
+    "$five_hour_reset_label"
 fi
 
-if [[ -n $seven_day_pct && $seven_day_pct != "null" ]]; then
-  seven_day_int=$(printf '%.0f' "$seven_day_pct" 2>/dev/null || echo 0)
-  seven_color=$(color_for_percentage "$seven_day_int")
-  seven_bar=$(progress_bar "$seven_day_int" "$seven_color")
-  seven_reset_str=$(format_resets_at "$seven_day_resets")
-  seven_reset_label=""
-  [[ -n $seven_reset_str ]] && seven_reset_label=" ${GRAY}reset ${seven_reset_str}${RESET}"
+if [[ -n $seven_day_percentage && $seven_day_percentage != "null" ]]; then
+  seven_day_integer=$(printf '%.0f' "$seven_day_percentage" 2>/dev/null || echo 0)
+  seven_day_color=$(color_for_percentage "$seven_day_integer")
+  seven_day_bar=$(progress_bar "$seven_day_integer" "$seven_day_color")
+  seven_day_reset_string=$(format_resets_at "$seven_day_resets_at")
+  seven_day_reset_label=""
+  [[ -n $seven_day_reset_string ]] && seven_day_reset_label=" ${GRAY}reset ${seven_day_reset_string}${RESET}"
   printf '%s%s 7d quota%s  [%s%s] %s%3d%%%s%s\n' \
     "$FOREGROUND" "$ICON_RATE" "$RESET" \
-    "$seven_bar" "$RESET" \
-    "$seven_color" "$seven_day_int" "$RESET" \
-    "$seven_reset_label"
+    "$seven_day_bar" "$RESET" \
+    "$seven_day_color" "$seven_day_integer" "$RESET" \
+    "$seven_day_reset_label"
 fi
