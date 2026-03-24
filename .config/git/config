@@ -29,3 +29,5 @@
   line-numbers = true
 [merge]
   conflictStyle = zdiff3
+[log]
+	date = iso-local
