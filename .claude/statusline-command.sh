@@ -129,7 +129,9 @@ printf '%s%s context%s   [%s%s] %s%3d%%%s\n' \
 format_resets_at() {
   local epoch=${1:-}
   [[ -z $epoch || $epoch == "null" ]] && return
-  TZ="Asia/Tokyo" date -d "@${epoch}" "+%y-%m-%d %H:%M" 2>/dev/null || true
+  TZ="Asia/Tokyo" date -r "${epoch}" "+%Y-%m-%d %H:%M" 2>/dev/null \
+    || TZ="Asia/Tokyo" date -d "@${epoch}" "+%Y-%m-%d %H:%M" 2>/dev/null \
+    || true
 }
 
 if [[ -n $five_hour_percentage && $five_hour_percentage != "null" ]]; then
