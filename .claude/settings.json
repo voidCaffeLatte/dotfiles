@@ -4,5 +4,8 @@
     "type": "command",
     "command": "$HOME/.claude/statusline-command.sh"
   },
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  }
 }
