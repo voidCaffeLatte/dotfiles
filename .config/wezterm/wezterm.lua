@@ -13,4 +13,18 @@ config.font = wezterm.font_with_fallback({
 })
 config.font_size = 10.0
 
+config.scrollback_lines = 30000
+config.enable_scroll_bar = true
+
+config.keys = {
+	{
+		key = "K",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.ClearScrollback("ScrollbackAndViewport"),
+			wezterm.action.SendKey({ key = "L", mods = "CTRL" }),
+		}),
+	},
+}
+
 return config
