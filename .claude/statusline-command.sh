@@ -3,20 +3,17 @@ set -euo pipefail
 
 readonly input=$(cat)
 
-# ─── ANSI 24-bit true color ───
-# Color palette inspired by Gruvbox Dark (https://github.com/morhetz/gruvbox), MIT License.
-hex_color() { printf '\033[38;2;%d;%d;%dm' "0x${1:0:2}" "0x${1:2:2}" "0x${1:4:2}"; }
-
-readonly GREEN=$(hex_color b8bb26)       # gruvbox bright green
-readonly YELLOW=$(hex_color fabd2f)      # gruvbox bright yellow
-readonly RED=$(hex_color fb4934)         # gruvbox bright red
-readonly BLUE=$(hex_color 83a598)        # gruvbox bright blue
-readonly ORANGE=$(hex_color fe8019)      # gruvbox bright orange
-readonly PURPLE=$(hex_color d3869b)      # gruvbox bright purple
-readonly AQUA=$(hex_color 8ec07c)        # gruvbox bright aqua
-readonly GRAY=$(hex_color 928374)        # gruvbox gray
-readonly LIGHT_GRAY=$(hex_color a89984)  # gruvbox fg4
-readonly FOREGROUND=$(hex_color ebdbb2)  # gruvbox fg1
+# ─── ANSI 16 colors (follows terminal color scheme) ───
+readonly GREEN=$'\033[92m'       # bright green
+readonly YELLOW=$'\033[93m'      # bright yellow
+readonly RED=$'\033[91m'         # bright red
+readonly BLUE=$'\033[94m'        # bright blue
+readonly ORANGE=$'\033[93m'      # bright yellow (substitute for orange)
+readonly PURPLE=$'\033[95m'      # bright magenta
+readonly AQUA=$'\033[96m'        # bright cyan
+readonly GRAY=$'\033[90m'        # bright black
+readonly LIGHT_GRAY=$'\033[37m'  # white
+readonly FOREGROUND=$'\033[97m'  # bright white
 readonly RESET=$'\033[0m'
 
 # Nerd Font icons (nf-md only for consistency)
