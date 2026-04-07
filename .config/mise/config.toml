@@ -2,12 +2,14 @@
 install_before = "7d"
 
 [tools]
+claude = "latest"
+codex = "latest"
 delta = "latest"
 fd = "latest"
 fzf = "latest"
+gemini-cli = "latest"
 jq = "latest"
 neovim = "latest"
 node = "latest"
-"npm:@openai/codex" = "latest"
 ripgrep = "latest"
 starship = "latest"
