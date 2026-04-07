@@ -1,7 +1,11 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-if wezterm.target_triple:find("windows") then
+local function is_windows()
+	return wezterm.target_triple:find("windows") ~= nil
+end
+
+if is_windows() then
 	config.default_domain = "WSL:Ubuntu-24.04"
 end
 
@@ -13,7 +17,7 @@ config.window_background_opacity = 0.95
 config.font = wezterm.font_with_fallback({
 	"UDEV Gothic 35NF",
 })
-config.font_size = 10.0
+config.font_size = is_windows() and 10.0 or 11.0
 
 config.scrollback_lines = 30000
 config.enable_scroll_bar = true
@@ -23,10 +27,10 @@ config.hide_tab_bar_if_only_one_tab = true
 
 config.inactive_pane_hsb = {
 	saturation = 0.9,
-	brightness = 0.6,
+	brightness = 0.5,
 }
 
-config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
 	{
 		key = "K",
@@ -36,7 +40,7 @@ config.keys = {
 			wezterm.action.SendKey({ key = "L", mods = "CTRL" }),
 		}),
 	},
-	{ key = "Space", mods = "LEADER|CTRL", action = wezterm.action.SendKey({ key = "Space", mods = "CTRL" }) },
+	{ key = "a", mods = "LEADER|CTRL", action = wezterm.action.SendKey({ key = "Space", mods = "CTRL" }) },
 	{
 		key = "\\",
 		mods = "LEADER",
