@@ -17,6 +17,7 @@ config.macos_forward_to_ime_modifier_mask = "CTRL|SHIFT"
 config.color_scheme = "Gruvbox dark, soft (base16)"
 config.window_background_opacity = 0.9
 config.win32_system_backdrop = "Acrylic"
+config.macos_window_background_blur = 40
 
 local font_with_fallback = wezterm.font_with_fallback({
 	"UDEV Gothic 35NF",
