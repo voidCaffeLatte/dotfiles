@@ -10,6 +10,7 @@ if is_windows() then
 end
 
 config.use_ime = true
+config.macos_forward_to_ime_modifier_mask = "CTRL|SHIFT"
 
 config.color_scheme = "Gruvbox dark, soft (base16)"
 config.window_background_opacity = 0.95
