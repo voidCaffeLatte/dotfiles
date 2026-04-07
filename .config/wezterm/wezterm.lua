@@ -1,6 +1,8 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
+config:set_strict_mode(true)
+
 local function is_windows()
 	return wezterm.target_triple:find("windows") ~= nil
 end
@@ -13,18 +15,26 @@ config.use_ime = true
 config.macos_forward_to_ime_modifier_mask = "CTRL|SHIFT"
 
 config.color_scheme = "Gruvbox dark, soft (base16)"
-config.window_background_opacity = 0.95
+config.window_background_opacity = 0.9
+config.win32_system_backdrop = "Acrylic"
 
-config.font = wezterm.font_with_fallback({
+local font_with_fallback = wezterm.font_with_fallback({
 	"UDEV Gothic 35NF",
 })
-config.font_size = is_windows() and 10.0 or 11.0
+config.font = font_with_fallback
+local font_size = is_windows() and 10.0 or 11.0
+config.font_size = font_size
 
 config.scrollback_lines = 30000
 config.enable_scroll_bar = true
 
-config.window_decorations = "RESIZE"
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
+config.window_frame = {
+	font = font_with_fallback,
+	font_size = font_size,
+}
 
 config.inactive_pane_hsb = {
 	saturation = 0.9,
@@ -39,6 +49,14 @@ config.keys = {
 		action = wezterm.action.Multiple({
 			wezterm.action.ClearScrollback("ScrollbackAndViewport"),
 			wezterm.action.SendKey({ key = "L", mods = "CTRL" }),
+		}),
+	},
+	{
+		key = "Space",
+		mods = "LEADER",
+		action = wezterm.action.ShowLauncherArgs({
+			flags = "FUZZY|TABS|WORKSPACES|DOMAINS|COMMANDS",
+			title = "Launcher",
 		}),
 	},
 	{ key = "a", mods = "LEADER|CTRL", action = wezterm.action.SendKey({ key = "Space", mods = "CTRL" }) },
@@ -101,6 +119,11 @@ config.keys = {
 		key = "n",
 		mods = "LEADER",
 		action = wezterm.action.SpawnWindow,
+	},
+	{
+		key = "p",
+		mods = "LEADER",
+		action = wezterm.action.PaneSelect,
 	},
 }
 
