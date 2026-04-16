@@ -1,5 +1,5 @@
 [settings]
-install_before = "7d"
+install_before = "3d"
 
 [tools]
 claude = "latest"
