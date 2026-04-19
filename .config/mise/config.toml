@@ -2,15 +2,24 @@
 install_before = "3d"
 
 [tools]
-claude = "latest"
-codex = "latest"
 delta = "latest"
 fd = "latest"
 fzf = "latest"
-gemini-cli = "latest"
 gh = "latest"
 jq = "latest"
 neovim = "latest"
 node = "latest"
 ripgrep = "latest"
 starship = "latest"
+
+[tools.claude]
+version = "latest"
+install_before = "0d"
+
+[tools.codex]
+version = "latest"
+install_before = "0d"
+
+[tools.gemini-cli]
+version = "latest"
+install_before = "0d"
