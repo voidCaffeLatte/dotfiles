@@ -7,8 +7,19 @@ local function is_windows()
 	return wezterm.target_triple:find("windows") ~= nil
 end
 
+local function pick_wsl_default_domain()
+	local domains = wezterm.default_wsl_domains()
+	if #domains == 0 then
+		return nil
+	end
+	return domains[1].name
+end
+
 if is_windows() then
-	config.default_domain = "WSL:Ubuntu-24.04"
+	local wsl_default_domain = pick_wsl_default_domain()
+	if wsl_default_domain then
+		config.default_domain = wsl_default_domain
+	end
 end
 
 config.use_ime = true
