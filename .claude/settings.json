@@ -1,4 +1,8 @@
 {
+  "env": {
+    "VISUAL": "nvim",
+    "EDITOR": "nvim"
+  },
   "model": "opus",
   "hooks": {
     "Notification": [
@@ -28,12 +32,8 @@
     "type": "command",
     "command": "$HOME/.claude/statusline-command.sh"
   },
-  "env": {
-    "VISUAL": "nvim",
-    "EDITOR": "nvim"
-  },
-  "effortLevel": "high",
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true
-  }
+  },
+  "effortLevel": "xhigh"
 }
