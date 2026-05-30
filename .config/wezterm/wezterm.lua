@@ -40,7 +40,7 @@ config.font_size = font_size
 config.scrollback_lines = 30000
 config.enable_scroll_bar = true
 
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+-- config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = {
