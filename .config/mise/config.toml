@@ -11,9 +11,6 @@ neovim = "latest"
 node = "latest"
 ripgrep = "latest"
 starship = "latest"
-ghcup = "latest"
-cabal = "latest"
-ghc = "latest"
 
 [tools.claude]
 version = "latest"
