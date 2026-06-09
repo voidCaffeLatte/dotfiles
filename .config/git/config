@@ -31,3 +31,5 @@
     conflictStyle = zdiff3
 [log]
     date = iso-local
+[include]
+    path = "~/.config/git/config.local"
