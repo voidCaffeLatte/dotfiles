@@ -1,5 +1,5 @@
 [settings]
-install_before = "3d"
+minimum_release_age = "3d"
 
 [tools]
 delta = "latest"
@@ -14,12 +14,12 @@ starship = "latest"
 
 [tools.claude]
 version = "latest"
-install_before = "0d"
+minimum_release_age = "0d"
 
 [tools.codex]
 version = "latest"
-install_before = "0d"
+minimum_release_age = "0d"
 
 [tools.gemini-cli]
 version = "latest"
-install_before = "0d"
+minimum_release_age = "0d"
