@@ -38,6 +38,7 @@ in
   home.packages = [
     pkgs.fish
     pkgs.git
+    pkgs.starship
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -62,6 +63,7 @@ in
   home.file = {
     ".config/fish/config.fish".source = ./.config/fish/config.fish;
     ".config/git/config".source = ./.config/git/config;
+    ".config/starship.toml".source = ./.config/starship.toml;
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
