@@ -38,6 +38,7 @@ in
   home.packages = [
     pkgs.fish
     pkgs.git
+    pkgs.mise
     pkgs.starship
 
     # # Adds the 'hello' command to your environment. It prints a friendly
@@ -63,6 +64,7 @@ in
   home.file = {
     ".config/fish/config.fish".source = ./.config/fish/config.fish;
     ".config/git/config".source = ./.config/git/config;
+    ".config/mise/config.toml".source = ./.config/mise/config.toml;
     ".config/starship.toml".source = ./.config/starship.toml;
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
