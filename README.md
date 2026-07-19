@@ -1,21 +1,54 @@
-# dotfiles
-
 ## Prerequisites
 
-The following tools must be installed manually before setting up this dotfiles:
+Install the following manually before the initial setup:
 
-- [WezTerm](https://wezfurlong.org/wezterm/) - Terminal Emulator
-- [Fish](https://fishshell.com/) - Shell
-- [mise](https://mise.jdx.dev/) - Dev Env Manager
+- [WezTerm](https://wezterm.org/installation.html) - Terminal emulator
 
-## Tools
+## Initial setup
 
-The following tools are managed by mise and will be installed automatically via `mise install`:
+### 1. Install Nix
 
-- [delta](https://github.com/dandavison/delta) - Git diff viewer
-- [fd](https://github.com/sharkdp/fd) - File finder
-- [fzf](https://github.com/junegunn/fzf) - Fuzzy finder
-- [jq](https://github.com/jqlang/jq) - JSON processor
-- [Neovim](https://neovim.io/) - Text editor
-- [ripgrep](https://github.com/BurntSushi/ripgrep) - Search tool
-- [Starship](https://starship.rs/) - Cross-shell prompt
+Install Nix using the community-maintained [Nix Installer](https://github.com/NixOS/nix-installer), with `nix-command` and flakes enabled:
+
+```sh
+curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install --enable-flakes
+```
+
+Restart the terminal after the installer finishes, then confirm that Nix is available:
+
+```sh
+nix --version
+```
+
+### 2. Clone this repository
+
+The repository must be located at `~/dotfiles` because out-of-store symlinks resolve configuration files from that path.
+
+```sh
+git clone https://github.com/voidCaffeLatte/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+```
+
+### 3. Activate Home Manager
+
+Use `nix run` for the first activation. The backup extension prevents existing configuration files from being overwritten.
+
+```sh
+nix run github:nix-community/home-manager -- \
+  switch --flake .#default --impure -b hm-backup
+```
+
+For subsequent configuration changes, run the installed Home Manager command from this repository:
+
+```sh
+home-manager switch --flake .#default --impure
+```
+
+## Updating
+
+Update the locked Nixpkgs and Home Manager inputs, then activate the new generation:
+
+```sh
+nix flake update
+home-manager switch --flake .#default --impure
+```
