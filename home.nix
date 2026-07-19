@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   # Host information is detected from the environment so that this
@@ -43,6 +43,7 @@ in
     pkgs.fzf
     pkgs.git
     pkgs.mise
+    pkgs.neovim
     pkgs.ripgrep
     pkgs.starship
 
@@ -70,6 +71,8 @@ in
     ".config/fish/config.fish".source = ./.config/fish/config.fish;
     ".config/git/config".source = ./.config/git/config;
     ".config/mise/config.toml".source = ./.config/mise/config.toml;
+    ".config/nvim".source =
+      config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/nvim";
     ".config/starship.toml".source = ./.config/starship.toml;
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
