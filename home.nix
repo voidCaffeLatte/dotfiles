@@ -37,9 +37,13 @@ in
   # environment.
   home.packages = [
     pkgs.codex
+    pkgs.delta
+    pkgs.fd
     pkgs.fish
+    pkgs.fzf
     pkgs.git
     pkgs.mise
+    pkgs.ripgrep
     pkgs.starship
 
     # # Adds the 'hello' command to your environment. It prints a friendly
