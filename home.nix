@@ -79,6 +79,7 @@ in
     ".config/nvim".source =
       config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/nvim";
     ".config/starship.toml".source = ./.config/starship.toml;
+    ".config/wezterm".source = ./.config/wezterm;
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
