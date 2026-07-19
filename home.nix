@@ -45,6 +45,7 @@ in
     pkgs.fd
     pkgs.fish
     pkgs.fzf
+    pkgs.gh
     pkgs.git
     pkgs.mise
     pkgs.neovim
