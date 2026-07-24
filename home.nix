@@ -47,6 +47,7 @@ in
     pkgs.fzf
     pkgs.gh
     pkgs.git
+    pkgs.jq
     pkgs.mise
     pkgs.neovim
     pkgs.ripgrep
