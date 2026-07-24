@@ -31,5 +31,7 @@
     conflictStyle = zdiff3
 [log]
     date = iso-local
+[includeIf "gitdir:/mnt/"]
+    path = "~/.config/git/config.windows-mount"
 [include]
     path = "~/.config/git/config.local"
