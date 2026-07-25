@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, claude-code, codex-cli, ... }:
 
 let
   # Host information is detected from the environment so that this
@@ -33,14 +33,11 @@ in
   # release notes.
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
-  nixpkgs.config.allowUnfreePredicate = package:
-    builtins.elem (lib.getName package) [ "claude-code" ];
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    pkgs.claude-code
-    pkgs.codex
+    claude-code.packages.${pkgs.system}.claude-code
+    codex-cli.packages.${pkgs.system}.default
     pkgs.delta
     pkgs.fd
     pkgs.fish
