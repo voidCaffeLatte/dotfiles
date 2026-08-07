@@ -19,7 +19,3 @@ minimum_release_age = "0d"
 [tools.codex]
 version = "latest"
 minimum_release_age = "0d"
-
-[tools.gemini-cli]
-version = "latest"
-minimum_release_age = "0d"
