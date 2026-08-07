@@ -49,6 +49,7 @@ in
     pkgs.neovim
     pkgs.ripgrep
     pkgs.starship
+    pkgs.uv
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
