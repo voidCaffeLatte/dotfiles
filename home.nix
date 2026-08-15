@@ -36,8 +36,8 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    claude-code.packages.${pkgs.system}.claude-code
-    codex-cli.packages.${pkgs.system}.default
+    claude-code.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
+    codex-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
     pkgs.delta
     pkgs.direnv
     pkgs.fd
