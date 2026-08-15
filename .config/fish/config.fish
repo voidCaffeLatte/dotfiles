@@ -6,10 +6,8 @@ if type -q starship
     starship init fish | source
 end
 
-# Activate mise if installed locally
-# (Homebrew installations are automatically activated via MISE_FISH_AUTO_ACTIVATE)
-if type -q ~/.local/bin/mise
-    ~/.local/bin/mise activate fish | source
+if type -q mise
+    mise activate fish | source
 end
 
 if type -q direnv
