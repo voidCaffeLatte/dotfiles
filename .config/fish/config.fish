@@ -12,4 +12,8 @@ if type -q ~/.local/bin/mise
     ~/.local/bin/mise activate fish | source
 end
 
+if type -q direnv
+    direnv hook fish | source
+end
+
 abbr --add -- g git

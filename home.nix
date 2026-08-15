@@ -39,6 +39,7 @@ in
     claude-code.packages.${pkgs.system}.claude-code
     codex-cli.packages.${pkgs.system}.default
     pkgs.delta
+    pkgs.direnv
     pkgs.fd
     pkgs.fish
     pkgs.fzf
