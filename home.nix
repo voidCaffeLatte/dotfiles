@@ -48,6 +48,7 @@ in
     pkgs.jq
     pkgs.mise
     pkgs.neovim
+    pkgs.nodejs_latest
     pkgs.ripgrep
     pkgs.starship
     pkgs.uv
