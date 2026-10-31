@@ -74,6 +74,8 @@ in
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".claude/CLAUDE.md".source = ./AGENTS.md;
+    ".codex/AGENTS.md".source = ./AGENTS.md;
     ".config/fish/config.fish".source = ./.config/fish/config.fish;
     ".config/git/config".source = ./.config/git/config;
     ".config/git/config.windows-mount".source = ./.config/git/config.windows-mount;
