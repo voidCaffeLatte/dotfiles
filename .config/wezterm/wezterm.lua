@@ -31,10 +31,10 @@ config.win32_system_backdrop = "Acrylic"
 config.macos_window_background_blur = 40
 
 local font_with_fallback = wezterm.font_with_fallback({
-	"UDEV Gothic 35NFLG",
+	"UDEV Gothic NFLG",
 })
 config.font = font_with_fallback
-local font_size = is_windows() and 9.0 or 12.0
+local font_size = is_windows() and 10.0 or 12.0
 config.font_size = font_size
 
 config.scrollback_lines = 30000
