@@ -80,6 +80,7 @@ in
     ".config/fish/config.fish".source = ./.config/fish/config.fish;
     ".config/git/config".source = ./.config/git/config;
     ".config/git/config.windows-mount".source = ./.config/git/config.windows-mount;
+    ".config/leaf".source = ./.config/leaf;
     ".config/mise/config.toml".source = ./.config/mise/config.toml;
     ".config/nvim".source =
       config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/.config/nvim";
