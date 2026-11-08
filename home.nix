@@ -46,6 +46,7 @@ in
     pkgs.gh
     pkgs.git
     pkgs.jq
+    pkgs.leaf-markdown-viewer
     pkgs.mise
     pkgs.neovim
     pkgs.nodejs_24
