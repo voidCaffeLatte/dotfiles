@@ -15,7 +15,11 @@
   outputs =
     { nixpkgs, home-manager, claude-code, codex-cli, ... }:
     let
-      pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
+      pkgs = import nixpkgs {
+        system = builtins.currentSystem;
+        config.allowUnfreePredicate =
+          package: builtins.elem (nixpkgs.lib.getName package) [ "antigravity-cli" ];
+      };
     in
     {
       homeConfigurations.default = home-manager.lib.homeManagerConfiguration {

@@ -38,6 +38,7 @@ in
   home.packages = [
     claude-code.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
     codex-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
+    pkgs.antigravity-cli
     pkgs.delta
     pkgs.direnv
     pkgs.fd
